@@ -1,14 +1,3 @@
-# UCIP
-User Context Interchange Protocol for Agentic AI Applications
-# User Context Interchange Protocol (UCIP)
-
-[![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yourusername/ucip/blob/main/LICENSE)
-[![GitHub Issues](https://img.shields.io/github/issues/yourusername/ucip.svg)](https://github.com/yourusername/ucip/issues)
-[![GitHub Stars](https://img.shields.io/github/stars/yourusername/ucip.svg)](https://github.com/yourusername/ucip/stargazers)
-
-## Overview
-
-UCIP is an open protocol for compactly representing user context (e.g., habits, mood, location) in multi-device AI experiences. It's optimized for LLMs and agents, with compatibility for MCP and A2A.
 # User Context Interchange Protocol (UCIP)
 
 [![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yourusername/ucip/blob/main/LICENSE)
@@ -123,6 +112,7 @@ protobuf.load('ucip.proto', (err, root) => {
   const decoded = UCIP.decode(buffer);
   console.log(decoded);
 });
+'''
 
 Contributing
 1.  Fork and create a branch: git checkout -b feature/new.
