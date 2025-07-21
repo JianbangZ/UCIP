@@ -101,7 +101,7 @@ decoded = ucip_pb2.UCIP()
 decoded.ParseFromString(binary)
 print(MessageToJson(decoded))
 
-Node.js Example
+**### Node.js Example**
 
 const protobuf = require('protobufjs');
 protobuf.load('ucip.proto', (err, root) => {
@@ -112,7 +112,7 @@ protobuf.load('ucip.proto', (err, root) => {
   const decoded = UCIP.decode(buffer);
   console.log(decoded);
 });
-'''
+
 
 Contributing
 1.  Fork and create a branch: git checkout -b feature/new.
