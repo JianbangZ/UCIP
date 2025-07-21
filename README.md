@@ -1,8 +1,8 @@
 # User Context Interchange Protocol (UCIP)
 
-[![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yourusername/ucip/blob/main/LICENSE)
-[![GitHub Issues](https://img.shields.io/github/issues/yourusername/ucip.svg)](https://github.com/yourusername/ucip/issues)
-[![GitHub Stars](https://img.shields.io/github/stars/yourusername/ucip.svg)](https://github.com/yourusername/ucip/stargazers)
+[![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/JianbangZ/ucip/blob/main/LICENSE)
+[![GitHub Issues](https://img.shields.io/github/issues/JianbangZ/ucip.svg)](https://github.com/JianbangZ/ucip/issues)
+[![GitHub Stars](https://img.shields.io/github/stars/JianbangZ/ucip.svg)](https://github.com/JianbangZ/ucip/stargazers)
 
 ## Overview
 
@@ -65,7 +65,7 @@ See Python/Node.js snippets below for creation. Serialized binary is compact; ex
 
 ### Quick Start
 1. **Clone the Repo**:
-   git clone https://github.com/yourusername/ucip.git cd ucip
+   git clone https://github.com/JianbangZ/ucip.git cd ucip
 2. **Compile Protobuf**:
    protoc –python_out=. ucip.proto  # Add –js_out=… for Node.js
 3. **Install Dependencies**:
