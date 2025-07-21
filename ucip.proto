@@ -1,0 +1,89 @@
+syntax = "proto3";
+
+message UCIP {
+  string version = 1;
+  string userId = 2;
+  string timestamp = 3;
+  Consent consent = 4;
+  BasicInfo basicInfo = 5;
+  map<string, string> preferences = 6;
+  repeated Habit habits = 7;
+  History history = 8;
+  CurrentState currentState = 9;
+  InferredInsights inferredInsights = 10;
+  map<string, string> customData = 11;  // String-based for simplicity; extend as needed
+}
+
+message Consent {
+  bool granted = 1;
+  repeated string scopes = 2;
+  string expiration = 3;
+}
+
+message BasicInfo {
+  string name = 1;
+  int32 age = 2;
+  string gender = 3;
+  string occupation = 4;
+  repeated string languages = 5;
+  Contact contact = 6;
+}
+
+message Contact {
+  string email = 1;
+  string phone = 2;
+}
+
+message Habit {
+  string description = 1;
+  enum Frequency {
+    DAILY = 0;
+    WEEKLY = 1;
+    MONTHLY = 2;
+    OCCASIONAL = 3;
+  }
+  Frequency frequency = 2;
+  enum Source {
+    USER = 0;
+    INFERRED = 1;
+    DEVICE = 2;
+  }
+  Source source = 3;
+  string lastObserved = 4;
+}
+
+message History {
+  repeated ConversationSummary conversationSummaries = 1;
+  repeated string pastActions = 2;
+  repeated string searchHistory = 3;
+}
+
+message ConversationSummary {
+  string date = 1;
+  string summary = 2;
+  repeated string keyInsights = 3;
+  string device = 4;
+}
+
+message CurrentState {
+  Location location = 1;
+  string mood = 2;
+  map<string, float> emotionScore = 3;
+  string currentActivity = 4;
+  string trueIntention = 5;
+  map<string, float> biometrics = 6;
+}
+
+message Location {
+  float lat = 1;
+  float long = 2;
+  string address = 3;
+  float accuracy = 4;
+}
+
+message InferredInsights {
+  repeated string personalityTraits = 1;
+  repeated string longTermGoals = 2;
+  float confidence = 3;
+  repeated string biasFlags = 4;
+}
