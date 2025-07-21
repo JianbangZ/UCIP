@@ -76,61 +76,59 @@ See Python/Node.js snippets below for creation. Serialized binary is compact; ex
 
 ### Quick Start
 1. **Clone the Repo**:
-Key Enhancements (v1.1):
-- **Lightweight**: Uses Protobuf for binary serialization (compact, fast).
-- **Secure**: E2EE with AES-256, JWT auth, and consent enforcement.
-- **Developer-Friendly**: Multi-language examples, easy API integration.
+   git clone https://github.com/yourusername/ucip.git cd ucip
+2. **Compile Protobuf**:
+   protoc –python_out=. ucip.proto  # Add –js_out=… for Node.js
+3. **Install Dependencies**:
+- Python: `pip install -r requirements.txt`
+- Node.js: `npm install protobufjs`
 
-### Use Cases
-- Multi-device AI continuity.
-- LLM prompt injection: "User mood: [decode UCIP.currentState.mood]".
-- Agent memory via MCP/A2A.
+4. **Validate and Test**:
+Run `python validate.py` (assumes example.pb—generate via examples).
 
-## Features
-- Compact binary format.
-- Privacy: Consent scopes, encryption.
-- Extensible: Custom fields.
+5. **Run API**:
+   python api.py
+   Access Swagger docs at http://localhost:8000/docs.
 
-## Protobuf Schema (ucip.proto)
+6. **Sync and Integrate**:
+- Use WebSockets (e.g., Socket.io) for real-time device sync.
+- Expose as MCP tool: Define endpoints like `/queryMood/{user_id}`.
 
-See [ucip.proto](./ucip.proto) for the full definition.
-
-### Example UCIP Message (Protobuf)
-Compile with `protoc --python_out=. ucip.proto`, then use in code.
-
-## Setup and Installation
-
-### Prerequisites
-- Python 3.12+ (for examples).
-- `protoc` compiler.
-- Dependencies: `pip install -r requirements.txt`.
-
-### Quick Start
-1. Clone: `git clone https://github.com/yourusername/ucip.git && cd ucip`
-2. Compile Protobuf: `protoc --python_out=. ucip.proto`
-3. Run validation: `python validate.py`
-4. Start API: `python api.py` (access at http://localhost:8000/docs)
-
-### Python Example: Encode/Decode UCIP
+### Python Example: Encode/Decode
 ```python
-import ucip_pb2  # Generated from ucip.proto
-from google.protobuf.json_format import MessageToJson, Parse
+import ucip_pb2
+from google.protobuf.json_format import MessageToJson
 
-# Create message
 ucip = ucip_pb2.UCIP()
 ucip.version = "1.0"
 ucip.userId = "user-123"
 ucip.timestamp = "2025-07-21T12:00:00Z"
 ucip.consent.granted = True
 ucip.consent.scopes.append("basic")
+binary = ucip.SerializeToString()
 
-# Serialize to binary
-binary_data = ucip.SerializeToString()
-
-# Deserialize
+# Decode
 decoded = ucip_pb2.UCIP()
-decoded.ParseFromString(binary_data)
+decoded.ParseFromString(binary)
+print(MessageToJson(decoded))
 
-# To JSON (for LLM prompts)
-json_str = MessageToJson(decoded)
-print(json_str)
+Node.js Example
+
+const protobuf = require('protobufjs');
+protobuf.load('ucip.proto', (err, root) => {
+  const UCIP = root.lookupType('UCIP');
+  const payload = { version: '1.0', userId: 'user-123', timestamp: '2025-07-21T12:00:00Z', consent: { granted: true, scopes: ['basic'] } };
+  const message = UCIP.create(payload);
+  const buffer = UCIP.encode(message).finish();
+  const decoded = UCIP.decode(buffer);
+  console.log(decoded);
+});
+
+Contributing
+1.  Fork and create a branch: git checkout -b feature/new.
+2.  Commit: git commit -m 'Add feature'.
+3.  Push and open a PR. Discuss major changes in issues first. Follow CODE_OF_CONDUCT.md.
+License
+MIT - see LICENSE.
+Acknowledgments
+Inspired by AI continuity needs and standards like MCP/A2A. Contributions welcome to evolve UCIP!
