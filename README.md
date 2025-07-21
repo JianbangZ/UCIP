@@ -100,9 +100,9 @@ binary = ucip.SerializeToString()
 decoded = ucip_pb2.UCIP()
 decoded.ParseFromString(binary)
 print(MessageToJson(decoded))
-
-**### Node.js Example**
-
+```
+### Node.js Example
+```
 const protobuf = require('protobufjs');
 protobuf.load('ucip.proto', (err, root) => {
   const UCIP = root.lookupType('UCIP');
@@ -112,13 +112,13 @@ protobuf.load('ucip.proto', (err, root) => {
   const decoded = UCIP.decode(buffer);
   console.log(decoded);
 });
+```
 
-
-Contributing
+### Contributing
 1.  Fork and create a branch: git checkout -b feature/new.
 2.  Commit: git commit -m 'Add feature'.
 3.  Push and open a PR. Discuss major changes in issues first. Follow CODE_OF_CONDUCT.md.
-License
+### License
 MIT - see LICENSE.
-Acknowledgments
+### Acknowledgments
 Inspired by AI continuity needs and standards like MCP/A2A. Contributions welcome to evolve UCIP!
