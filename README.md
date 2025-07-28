@@ -71,19 +71,20 @@ See Python/Node.js snippets below for creation. Serialized binary is compact; ex
 3. **Install Dependencies**:
 - Python: `pip install -r requirements.txt`
 - Node.js: `npm install protobufjs`
-
-4. **Validate and Test**:
+4. **Generate pb
+   python generate_pb.py
+5. **Validate and Test**:
 Run `python validate.py` (assumes example.pb—generate via examples).
 
-5. **Run API**:
+6. **Run API**:
    python api.py
    Access Swagger docs at http://localhost:8000/docs.
 
-6. **Sync and Integrate**:
+7. **Sync and Integrate**:
 - Use WebSockets (e.g., Socket.io) for real-time device sync.
 - Expose as MCP tool: Define endpoints like `/queryMood/{user_id}`.
 
-### Python Example: Encode/Decode
+### Python Example to test Encode and Decode, wirte the encoded file to 'example.pb'
 ```python
 import ucip_pb2
 from google.protobuf.json_format import MessageToJson
@@ -96,6 +97,10 @@ ucip.consent.granted = True
 ucip.consent.scopes.append("basic")
 binary = ucip.SerializeToString()
 
+# Write to file
+with open('example.pb', 'wb') as f:
+    f.write(binary)
+    
 # Decode
 decoded = ucip_pb2.UCIP()
 decoded.ParseFromString(binary)
